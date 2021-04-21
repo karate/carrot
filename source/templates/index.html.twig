@@ -1,0 +1,10 @@
+    <ul class="post-list">
+      {% for post in posts %}
+        <li>
+          <a href="{{ post.slug }}" title="{{ post.title }}">{{ post.title }}</a>
+            <time datetime="{{ post.date|date("Y-m-d") }}">
+              {{ post.date|date("F j, Y") }}
+            </time>
+        </li>
+      {% endfor %}
+    </ul>

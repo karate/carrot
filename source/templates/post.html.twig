@@ -1,0 +1,14 @@
+    <article>
+      <section class="header">
+        <h3 class="post-title">{{ post.title }}</h3>
+        {% if not post.is_menu %}
+          <time datetime="{{ post.date|date("Y-m-d") }}">
+            {{ post.date|date("F j, Y") }}
+          </time>
+        {% endif %}
+      </section>
+
+      <section class="content">
+      {{ post.content | raw }}
+      </section>
+    </article>

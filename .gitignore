@@ -1,0 +1,7 @@
+vendor
+publish
+source/posts/*
+*.swp
+composer.lock
+.phpunit.cache
+tags

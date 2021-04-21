@@ -1,0 +1,15 @@
+%YAML 1.2
+---
+site:
+  name: My personal blog
+  description: A witty quote goes here...
+
+paths:
+  # If the site is not going to be served from the server's web root
+  # change this to the directory name, eg: /my-blog
+  # ALWAYS START WITH A '/'
+  web_dir: /
+
+menu:
+  max_items: 5
+  show_home: true
