@@ -1,6 +1,4 @@
-<p align="center"><img alt="Carrot" src="https://github.com/karate/carrot/blob/master/resources/carrot_logo.png?raw=true" width="47" /></p>
-
-# Carrot
+<p align="center"><img alt="Carrot" src="https://github.com/karate/carrot/blob/master/resources/banner.png?raw=true" width="301" /></p>
 
 ## What is this?
 This is one of the simplest static site generators (SSG) out there.
