@@ -56,7 +56,13 @@ composer serve
 Deploy your site to your server by uploading the `publish` directory
 
 ## Contribute
-This is a very light program by design, and I'm only planning to only
-include features that I'm going to use. You're more than welcome to report issues
-and bugs by creating Issues. If you want to contribute with code, please create an
-issue before any PRs.
+This is a very light program by design, and I'm only planning to
+include features that I'm going to use. You're more than welcome to report
+bugs or ask for features by creating Issues.
+
+If you want to contribute code, please create an issue before any PRs.
+Also make sure your changes pass the tests with:
+```
+composer test
+```
+and if you add any new functionality, make sure to write some tests for it.
