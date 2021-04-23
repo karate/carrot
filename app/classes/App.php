@@ -104,7 +104,8 @@ class App {
     }
   }
 
-  private function add_menu_item($title, $slug, $prepend = false) {
+  private function add_menu_item($title, $slug, $prepend = false): void
+  {
     $menu_data = [
       'title' => $title,
       'slug'  => $slug,
