@@ -31,7 +31,7 @@ class FilesystemHelper {
   {
     if (!file_exists($dir_name)) {
       try {
-        mkdir($dir_name);
+        mkdir($dir_name, $mode = 0777, $recursive = true);
       } catch (\Exception $e) {
         echo 'Caught exception: ',  $e->getMessage(), "\n";
       }

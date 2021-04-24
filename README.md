@@ -25,7 +25,7 @@ be visible in the index page, but it will be shown in the site's menu
 - [x] Extended markdown with yaml metadata [metaparsedown](https://github.com/pagerange/metaparsedown)
 - [x] Unit testing, 100% coverage in core classes and methods
 - [x] Main menu
-- [ ] Tags / Topics per post
+- [x] Tags / Topics per post
 - [ ] Image manipulation (resize, optimize, thumbnails etc)
 
 ## Usage

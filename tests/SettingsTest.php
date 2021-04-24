@@ -108,4 +108,12 @@ final class SettingsTest extends TestCase
       $show_home > 0, "Menu max items is not greater than 0"
     );
   }
+
+  public function testCanReadShowTagsList(): void
+  {
+    $show_tag_list = $this->settings->get_show_tags();
+    $this->assertTrue(
+      is_bool($show_tag_list), "Show tags option not found"
+    );
+  }
 }

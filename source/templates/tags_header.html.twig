@@ -1,0 +1,12 @@
+<section class="all-tags">
+  <ul class="tag-list">
+  {% for tag in tags %}
+    <li class="tag">
+      <a href="{{site.web_dir}}tags/{{ tag.name }}">
+        {{ tag.name }}</a>
+        ({{ tag.posts | length }})
+      </a>
+    </li>
+  {% endfor %}
+  </ul>
+</section>

@@ -6,6 +6,16 @@
             {{ post.date|date("F j, Y") }}
           </time>
         {% endif %}
+
+        {% if post.tags %}
+          <section class="tags">
+            <ul class="tag-list">
+            {% for tag in post.tags %}
+              <li class="tag"><a href="{{site.web_dir}}tags/{{ tag }}">{{ tag }}</a>({{ attribute(tags, tag).posts|length }})</li>
+            {% endfor %}
+            </ul>
+          </section>
+        {% endif %}
       </section>
 
       <section class="content">

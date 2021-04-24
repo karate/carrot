@@ -10,26 +10,24 @@
       </header>
 
       {% if menu is defined %}
-        <nav class="menu">
-          <ul>
-            {% for item in menu %}
-              <li>
-                <a href="{{ item.slug }}/" title="{{ item.title }}">{{ item.title }}</a>
-              </li>
-            {% endfor %}
-          </ul>
-        </nav>
+        {% include 'menu.html.twig' %}
       {% endif %}
 
       <div class="content">
-        {% if is_index %}
+        {% if page == 'index' %}
           {% include 'index.html.twig' %}
+        {% elseif page == 'tag' %}
+          {% include 'tags.html.twig' %}
         {% else %}
           {% include 'post.html.twig' %}
         {% endif %}
       </div>
 
+      {% if tags %}
+        {% include 'tags_header.html.twig' %}
+      {% endif %}
+
       <footer>
-      {% include 'footer.html.twig' %}
+        {% include 'footer.html.twig' %}
       </footer>
     </div>

@@ -1,0 +1,12 @@
+    <h4>Posts tagged with <code>{{ tag_name }}</code>:</h4>
+
+    <ul class="post-list">
+      {% for post in posts %}
+        <li>
+          <a href="{{ site.web_dir }}{{ post.slug }}/" title="{{ post.title }}">{{ post.title }}</a>
+            <time datetime="{{ post.date|date("Y-m-d") }}">
+              {{ post.date|date("F j, Y") }}
+            </time>
+        </li>
+      {% endfor %}
+    </ul>

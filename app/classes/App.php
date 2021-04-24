@@ -10,6 +10,7 @@ class App {
   private array $menu = [];
   private array $index = [];
   private array $posts = [];
+  private array $tags = [];
 
   private \Twig\TemplateWrapper $twig_template;
 
@@ -36,6 +37,8 @@ class App {
 
     $this->export_dir = $this->settings->get_export_dir();
     $this->source_dir = $this->settings->get_source_dir();
+
+    $this->show_tags = $this->settings->get_show_tags();
   }
 
   public function run(): void
@@ -46,6 +49,9 @@ class App {
     $this->load_twig_templates();
     $this->create_pages();
     $this->create_index();
+    if ($this->show_tags) {
+      $this->create_tag_pages();
+    }
   }
 
   private function load_twig_templates(): void
@@ -73,6 +79,10 @@ class App {
       $post = new \Carrot\Post($this->source_dir . $post_filename);
       $post_data = $post->get_post_data();
 
+      if (!$this->show_tags) {
+        $post_data['tags'] = [];
+      }
+
       // Menu items
       if ($post->is_menu()) {
         print('* ' . $post_data['menu_title'] . "\n");
@@ -98,9 +108,18 @@ class App {
         'date'    => $post_data['date'],
         'is_menu' => $post_data['show_in_menu'],
         'content' => $post_data['markup'],
+        'tags'    => $post_data['tags'],
       ];
 
       $this->posts[] = $blog;
+
+      if ($this->show_tags && $post_data['tags']) {
+        $tags = $post_data['tags'];
+        foreach($tags as $tag) {
+          $this->tags[$tag]['name'] = $tag;
+          $this->tags[$tag]['posts'][] = $blog;
+        }
+      }
     }
   }
 
@@ -141,7 +160,14 @@ class App {
     ];
 
     foreach($this->posts as $blog_post) {
-      $output = $this->twig_template->render(['is_index' => false, 'site' => $site, 'post' => $blog_post, 'menu' => $this->menu]);
+      $output = $this->twig_template->render([
+        'page' => 'post',
+        'site' => $site,
+        'post' => $blog_post,
+        'menu' => $this->menu,
+        'tags' => $this->tags,
+      ]);
+
       $this->filesystem_helper->create_post(['slug' => $blog_post['slug'], 'markup' => $output]);
     }
   }
@@ -159,7 +185,43 @@ class App {
       return ($a['date'] < $b['date']);
     });
 
-    $output = $this->twig_template->render(['is_index' => true, 'site' => $site, 'posts' => $this->index, 'menu' => $this->menu]);
+    $output = $this->twig_template->render([
+      'page' => 'index',
+      'site' => $site,
+      'posts' => $this->index,
+      'menu' => $this->menu,
+      'tags' => $this->tags,
+    ]);
+
     $this->filesystem_helper->create_post(['slug' => '', 'markup' => $output]);
   }
+
+  private function create_tag_pages(): void
+  {
+    $site = [
+      'name' => $this->settings->get_site_name(),
+      'description' => $this->settings->get_site_description(),
+      'web_dir' => $this->settings->get_web_dir(),
+    ];
+
+    foreach($this->tags as $tag) {
+      // Order posts by date to create the index page
+      usort($tag['posts'], function($a, $b){
+        return ($a['date'] < $b['date']);
+      });
+
+      $output = $this->twig_template->render([
+        'page' => 'tag',
+        'tag_name' => $tag['name'],
+        'site' => $site,
+        'posts' => $tag['posts'],
+        'menu' => $this->menu,
+        'tags' => $this->tags,
+      ]);
+
+      $this->filesystem_helper->create_post(['slug' => 'tags/' . $tag['name'], 'markup' => $output]);
+    }
+
+  }
+
 }

@@ -13,3 +13,6 @@ paths:
 menu:
   max_items: 5
   show_home: true
+
+tags:
+  show_tags: true

@@ -23,7 +23,7 @@ h2 {
 }
 
 pre {
-  background-color: #dddddd;
+  background-color: #efefef;
   padding: 0.2rem 0.5rem;
   margin: 0.41rem 0;
   line-height: initial;
@@ -32,9 +32,9 @@ pre {
 code {
   font-family: monospace;
   font-size: initial;
-  background-color: #dddddd;
-  background-color: #dddddd;
-  background-color: #dddddd;
+  background-color: #efefef;
+  background-color: #efefef;
+  background-color: #efefef;
   padding: 0 3px;
 }
 
@@ -104,6 +104,40 @@ nav.menu ul {
   justify-content: center;
 }
 
+.content section.header ul.tag-list::before {
+  content: "🏷";
+}
+
+.content section.header ul.tag-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  justify-content: flex-start;
+  flex-flow: wrap;
+  font-family: monospace;
+  font-size: 0.9em;
+}
+
+section.all-tags ul.tag-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  flex-flow: wrap;
+  font-size: 0.9em;
+  background-color: #eaffbf;
+  border-bottom: 1px dashed;
+}
+
+section.all-tags ul.tag-list::before {
+  content: "All tags:";
+}
+
+.content section.header ul.tag-list li {
+  margin: 0 0.5em;
+}
 nav.menu ul li {
   padding: 5px;
 }
@@ -150,7 +184,6 @@ article section.header time {
 div.content {
   padding: 1rem;
   background-color: #eaffbf;
-  border-bottom: 1px dashed;
   border-top: 1px dashed;
 }
 

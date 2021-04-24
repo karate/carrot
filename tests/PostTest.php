@@ -16,6 +16,7 @@ final class PostTest extends TestCase
   private string $date   = '2021-03-17';
   private string $slug_with_menu   = 'hello-world-with-menu';
   private string $slug_without_menu   = 'hello-world-without-menu';
+  private string $tags   = 'tag-1 tag-2';
   private string $markup = 'test markup';
   private string $menu   = 'Hello';
 
@@ -27,6 +28,7 @@ title: '$this->title'
 date: '$this->date'
 slug: '$this->slug_with_menu'
 menu: '$this->menu'
+tags: '$this->tags'
 ---
 $this->markup
 EOT;
@@ -104,6 +106,12 @@ EOT;
   {
     $this->assertEquals($this->post_with_menu->get_menu_name(), $this->menu, 'Test post menu name is wrong');
     $this->assertNull($this->post_without_menu->get_menu_name(), $this->menu, 'Test post should not have a name');
+  }
+
+  public function testGetTags(): void
+  {
+    $this->assertEquals($this->post_with_menu->get_tags(), explode(' ', $this->tags), 'Tags read wrong');
+    $this->assertEquals($this->post_without_menu->get_tags(), [], 'Tags not empty');
   }
 }
 

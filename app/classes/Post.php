@@ -9,9 +9,10 @@ class Post {
   private string $title;
   private \DateTime $date;
   private string $slug;
+  private array $tags = [];
   private string $markup;
   private bool $show_in_menu = false;
-  private ?string $menu_name;
+  private ?string $menu_name = null;
 
   public function __construct($file_name_full_path)
   {
@@ -29,13 +30,15 @@ class Post {
     $this->date  = DateTime::createFromFormat('Y-m-d', $meta['date']);
     $this->title = $meta['title'];
     $this->slug  = $meta['slug'];
+    if (isset($meta['tags'])) {
+      $this->tags = explode(' ', $meta['tags']);
+    }
     if (isset($meta['menu'])) {
       $this->show_in_menu = true;
       $this->menu_name = $meta['menu'];
     }
     else {
       $this->show_in_menu = false;
-      $this->menu_name = null;
     }
   }
 
@@ -45,10 +48,16 @@ class Post {
       'title'  => $this->get_title(),
       'date'   => $this->get_date(),
       'slug'   => $this->get_slug(),
+      'tags' => $this->tags,
       'markup' => $this->get_markup(),
       'show_in_menu' => $this->show_in_menu,
       'menu_title' => $this->menu_name,
     ];
+  }
+
+  public function get_title(): string
+  {
+    return $this->title;
   }
 
   public function get_date(): \DateTime
@@ -61,14 +70,14 @@ class Post {
     return $this->slug;
   }
 
+  public function get_tags(): array
+  {
+    return $this->tags;
+  }
+
   public function get_markup(): string
   {
     return $this->markup;
-  }
-
-  public function get_title(): string
-  {
-    return $this->title;
   }
 
   public function is_menu(): bool

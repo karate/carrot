@@ -61,4 +61,9 @@ class Settings {
   {
     return $this->source_dir;
   }
+
+  public function get_show_tags(): bool
+  {
+    return $this->settings['tags']['show_tags'];
+  }
 }
