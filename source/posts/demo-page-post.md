@@ -16,6 +16,10 @@ __This will also be bold__
 
 _You **can** combine them_
 
+This is an image
+
+![Carrot logo](/blog/resources/carrot_logo.png)
+
 Ordered list:
 * Item 1
 * Item 2
